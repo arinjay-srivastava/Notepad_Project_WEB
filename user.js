@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Login function
 function login(event) {
     event.preventDefault(); 
-    // Get form inputs
+    // form inputs
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
 
