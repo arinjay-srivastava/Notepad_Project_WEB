@@ -6,9 +6,9 @@ function Note(title, content) {
 
 // Note creation function
 function createNote(event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); 
 
-    // Get form inputs
+    // Form inputs
     const title = document.getElementById('noteTitle').value;
     const content = document.getElementById('noteContent').value;
     const newNote = new Note(title, content);
