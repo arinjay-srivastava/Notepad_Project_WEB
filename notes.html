@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes - NotePad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="notes">
+    <header>
+        <h1>NotePad <img src="images/logo.jpg" alt="NotePad Logo"></h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="notes.html">My Notes</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>My Notes</h2>
+        <form id="noteForm">
+            <label for="noteTitle">Title:</label>
+            <input type="text" id="noteTitle" name="title">
+            
+            <label for="noteContent">Content:</label>
+            <textarea id="noteContent" name="content"></textarea>
+            
+            <input type="submit" value="Save Note">
+        </form>
+        
+        <section id="notes-display">
+
+        </section>
+        <script src="notes.js"></script>
+
+    </main>
+</body>
+</html>
