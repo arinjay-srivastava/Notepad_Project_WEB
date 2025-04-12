@@ -6,7 +6,7 @@ function User(firstName, lastName, username, password) {
     this.password = password;
 }
 
-
+// Register function
 function register(event) {
     event.preventDefault(); // Prevent form submission
 
