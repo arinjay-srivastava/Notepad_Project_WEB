@@ -43,9 +43,8 @@ function login(e) {
 }
 
 // Event listener to the login form
-document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', login);
-    }
-});
+    
+};

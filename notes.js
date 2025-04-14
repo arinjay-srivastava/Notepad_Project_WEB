@@ -16,10 +16,9 @@ function createNote(e) {
 }
 
 // Event listener to the note creation form
-document.addEventListener('DOMContentLoaded', function() {
     const noteForm = document.getElementById('noteForm');
     if (noteForm) {
         noteForm.addEventListener('submit', createNote);
     }
-});
+;
 }
