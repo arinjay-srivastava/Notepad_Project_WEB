@@ -23,7 +23,7 @@ function register(e) {
 }
 
 // Event listener for the registration form
-document.addEventListener('registerForm', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', register);
@@ -31,8 +31,8 @@ document.addEventListener('registerForm', function() {
 });
 
 // Login function
-function login(event) {
-    event.preventDefault(); 
+function login(e) {
+    e.preventDefault(); 
     // form inputs
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
@@ -43,7 +43,7 @@ function login(event) {
 }
 
 // Event listener to the login form
-document.addEventListener('loginForm', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', login);
