@@ -7,8 +7,8 @@ function User(firstName, lastName, username, password) {
 }
 
 // Register function
-function register(event) {
-    event.preventDefault(); // Prevent form submission
+function register(e) {
+    e.preventDefault(); // Prevent form submission
 
     // Form inputs
     const firstName = document.getElementById('firstName').value;
@@ -23,7 +23,7 @@ function register(event) {
 }
 
 // Event listener for the registration form
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('registerForm', function() {
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', register);
@@ -43,7 +43,7 @@ function login(event) {
 }
 
 // Event listener to the login form
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('loginForm', function() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', login);

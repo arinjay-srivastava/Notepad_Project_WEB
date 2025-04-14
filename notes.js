@@ -5,8 +5,8 @@ function Note(title, content) {
     this.createdAt = new Date(); // This will set the time when the note is created
 
 // Note creation function
-function createNote(event) {
-    event.preventDefault(); 
+function createNote(e) {
+    e.preventDefault(); 
 
     // Form inputs
     const title = document.getElementById('noteTitle').value;
@@ -16,7 +16,7 @@ function createNote(event) {
 }
 
 // Event listener to the note creation form
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('noteForm', function() {
     const noteForm = document.getElementById('noteForm');
     if (noteForm) {
         noteForm.addEventListener('submit', createNote);
