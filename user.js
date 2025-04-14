@@ -23,12 +23,12 @@ function register(e) {
 }
 
 // Event listener for the registration form
-document.addEventListener('DOMContentLoaded', function() {
+
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', register);
     }
-});
+;
 
 // Login function
 function login(e) {
