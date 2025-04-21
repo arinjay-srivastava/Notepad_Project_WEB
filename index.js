@@ -3,23 +3,34 @@ const path = require("path");
 const noteRoutes = require("./server/routes/note");
 const userRoutes = require("./server/routes/user");
 const User = require("./server/models/user");
-// const Note = require("./server/models/note");
+const Note = require("./server/models/note");
 
 const app = express();
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "frontend"))); // Serve frontend files
+app.use(express.static(path.join(__dirname, "public")));
+
+// Debug routes
+app.use("/api", (req, res, next) => {
+  console.log(`Registering route: ${req.method} ${req.path}`);
+  next();
+});
 app.use("/api", noteRoutes);
 app.use("/api", userRoutes);
 
 // Serve index.html for any non-API routes
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 async function initDatabase() {
-  await User.createTable();
-  await Note.createTable();
+  try {
+    await User.createTable();
+    await Note.createTable();
+    console.log("Database tables created successfully");
+  } catch (err) {
+    console.error("Error initializing database:", err);
+  }
 }
 
 initDatabase();

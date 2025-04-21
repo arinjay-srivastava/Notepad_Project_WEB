@@ -6,6 +6,8 @@ async function createTable() {
       noteId INT AUTO_INCREMENT PRIMARY KEY,
       content TEXT NOT NULL,
       userId INT,
+      createdTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      deletedTime TIMESTAMP NULL,
       FOREIGN KEY (userId) REFERENCES User(userId)
     );
   `;
@@ -23,14 +25,20 @@ async function createNote(note) {
 }
 
 async function getNoteById(noteId) {
-  const sql = "SELECT * FROM Note WHERE noteId = ?";
+  const sql = "SELECT * FROM Note WHERE noteId = ? AND deletedTime IS NULL";
   const result = await con.query(sql, [noteId]);
   return result;
 }
 
 async function getAllNotesByUserId(userId) {
-  const sql = "SELECT * FROM Note WHERE userId = ?";
+  const sql = "SELECT * FROM Note WHERE userId = ? AND deletedTime IS NULL";
   const result = await con.query(sql, [userId]);
+  return result;
+}
+
+async function getAllNotes() {
+  const sql = "SELECT noteId, content, userId, createdTime FROM Note WHERE deletedTime IS NULL";
+  const result = await con.query(sql);
   return result;
 }
 
@@ -38,16 +46,16 @@ async function updateNoteById(noteId, updatedNote) {
   if (!updatedNote.content) {
     throw new Error("Content is required");
   }
-  const sql = "UPDATE Note SET content = ? WHERE noteId = ?";
+  const sql = "UPDATE Note SET content = ? WHERE noteId = ? AND deletedTime IS NULL";
   const values = [updatedNote.content, noteId];
   const result = await con.query(sql, values);
   return result.affectedRows > 0;
 }
 
 async function deleteNoteById(noteId) {
-  const sql = "DELETE FROM Note WHERE noteId = ?";
+  const sql = "UPDATE Note SET deletedTime = CURRENT_TIMESTAMP WHERE noteId = ? AND deletedTime IS NULL";
   const result = await con.query(sql, [noteId]);
   return result.affectedRows > 0;
 }
 
-module.exports = { createTable, createNote, getNoteById, getAllNotesByUserId, updateNoteById, deleteNoteById };
+module.exports = { createTable, createNote, getNoteById, getAllNotesByUserId, getAllNotes, updateNoteById, deleteNoteById };

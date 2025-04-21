@@ -6,7 +6,7 @@ const con = mysql.createPool({
   user: process.env.MYSQL_USERNAME,
   password: process.env.MYSQL_PSD,
   database: process.env.MYSQL_DB,
-  port:3306
+  port: process.env.PORT
 });
 
 const query = (sql, binding) => {
