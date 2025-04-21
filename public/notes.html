@@ -14,27 +14,27 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="notes.html">My Notes</a></li>
-            <li><a href="index.html">Logout</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
         </ul>
     </nav>
     <main>
         <h2>My Notes</h2>
-        <form id="noteForm">
+        <form id="noteForm" aria-labelledby="noteFormHeading">
+            <h3 id="noteFormHeading">Create a Note</h3>
             <label for="noteTitle">Note Title:</label>
-            <input type="text" id="noteTitle" name="title">
-            
+            <input type="text" id="noteTitle" name="title" required>
             <label for="noteContent">Content:</label>
-            <textarea id="noteContent" name="content"></textarea>
-            
+            <textarea id="noteContent" name="content" required></textarea>
             <input type="submit" value="Save Note">
         </form>
-        
-        <section id="notes-display">
-
-        </section>
-        
-
+        <section id="notes-display" aria-live="polite"></section>
     </main>
-    <script src="notes.js"></script>
+    <script src="note.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('userId');
+            window.location.href = 'index.html';
+        }
+    </script>
 </body>
 </html>

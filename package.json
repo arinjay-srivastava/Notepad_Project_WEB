@@ -1,7 +1,29 @@
 {
   "dependencies": {
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mysql2": "^3.14.0",
+    "mysql2": "^3.14.0"
+  },
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "This is a web application that allows users to create, view, edit, and delete notes. The application is built using HTML, CSS, and JavaScript. The application is designed to be user-friendly and easy to use. The application also has a database that stores all the notes created by the users.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arinjay-srivastava/Final-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arinjay-srivastava/Final-Project/issues"
+  },
+  "homepage": "https://github.com/arinjay-srivastava/Final-Project#readme",
+  "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "type":"commonjs"
 }

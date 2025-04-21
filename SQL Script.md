@@ -10,6 +10,8 @@ CREATE TABLE User (
     Deleted BOOLEAN DEFAULT FALSE
     
 );
+ALTER TABLE User
+ADD Email VARCHAR(255) NOT NULL AFTER Username;
 
 CREATE TABLE Note (
     Noteid INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,6 +21,9 @@ CREATE TABLE Note (
     CreatedTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     DeletedTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE User
+ADD Email VARCHAR(255) NOT NULL AFTER Username;
 
 This SQL code creates the "User" and "Note" tables with the following features:
 

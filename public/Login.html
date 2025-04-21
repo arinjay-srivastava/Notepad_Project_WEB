@@ -18,18 +18,15 @@
     </nav>
     <main>
         <h2>Welcome Back!!</h2>
-        <form id="loginForm">
+        <form id="loginForm" aria-labelledby="loginFormHeading">
+            <h3 id="loginFormHeading">Login</h3>
             <label for="loginUsername">Username:</label>
-            <input type="text" id="loginUsername" name="username">
-            
+            <input type="text" id="loginUsername" name="username" required>
             <label for="loginPassword">Password:</label>
-            <input type="password" id="loginPassword" name="password">
-            
+            <input type="password" id="loginPassword" name="password" required>
             <input type="submit" value="Login">
         </form>
-        
         <p>New to NotePad? <a href="register.html">Register here</a></p>
-        
     </main>
     <script src="user.js"></script>
 </body>

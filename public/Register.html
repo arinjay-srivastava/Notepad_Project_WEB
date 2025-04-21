@@ -16,28 +16,23 @@
             <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
-
     <main>
         <h2>Want to Join NotePad?</h2>
-        <form id="registerForm">
-
+        <form id="registerForm" aria-labelledby="registerFormHeading">
+            <h3 id="registerFormHeading">Register</h3>
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName">
-            
+            <input type="text" id="firstName" name="firstName" required>
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName">
-            
+            <input type="text" id="lastName" name="lastName" required>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-            
+            <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-            
+            <input type="password" id="password" name="password" required>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
             <input type="submit" value="Register">
         </form>
-        
         <p>Already have an account? <a href="login.html">Login here</a></p>
-        <script src="user.js"></script>
     </main>
     <script src="user.js"></script>
 </body>
