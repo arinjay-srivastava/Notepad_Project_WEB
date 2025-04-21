@@ -36,9 +36,9 @@ async function getAllNotesByUserId(userId) {
   return result;
 }
 
-async function getAllNotes() {
-  const sql = "SELECT noteId, content, userId, createdTime FROM Note WHERE deletedTime IS NULL";
-  const result = await con.query(sql);
+async function getAllNotes(userId) {
+  const sql = "SELECT noteId, content, userId, createdTime FROM Note WHERE userId = ? AND deletedTime IS NULL";
+  const result = await con.query(sql, [userId]);
   return result;
 }
 

@@ -29,7 +29,11 @@ router
   })
   .get('/notes', async (req, res) => {
     try {
-      const notes = await Note.getAllNotes();
+      const userId = req.query.userId;
+      if (!userId) {
+        return res.status(400).json({ message: "userId query parameter is required" });
+      }
+      const notes = await Note.getAllNotes(userId);
       res.status(200).json(notes);
     } catch (err) {
       res.status(500).json({ message: err.message });
