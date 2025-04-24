@@ -16,7 +16,7 @@ async function createNote(e) {
   }
   const newNote = new NoteModel(title, content, userId);
   try {
-      const response = await fetch('/api/notes', {
+      const response = await fetch('http://localhost:3000/api/notes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: `${title}: ${content}`, userId })

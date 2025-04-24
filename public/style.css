@@ -94,6 +94,7 @@ label {
 /* Grouped selector is used */
 input[type="text"],
 input[type="password"],
+input[type="email"],
 textarea {
     width: 100%;
     padding: 0.5rem;
