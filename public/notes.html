@@ -17,17 +17,31 @@
             <li><a href="#" onclick="logout()">Logout</a></li>
         </ul>
     </nav>
-    <main>
-        <h2>My Notes</h2>
-        <form id="noteForm" aria-labelledby="noteFormHeading">
-            <h3 id="noteFormHeading">Create a Note</h3>
-            <label for="noteTitle">Note Title:</label>
-            <input type="text" id="noteTitle" name="title" required>
-            <label for="noteContent">Content:</label>
-            <textarea id="noteContent" name="content" required></textarea>
-            <input type="submit" value="Save Note">
-        </form>
-        <section id="notes-display" aria-live="polite"></section>
+    <main class="notes-container">
+        <!-- Sidebar for older notes -->
+        <aside class="notes-sidebar">
+            <h3>My Notes</h3>
+            <ul id="notes-list" aria-live="polite"></ul>
+        </aside>
+        <!-- Main content for creating and viewing notes -->
+        <section class="notes-content">
+            <h2>Create or View Notes</h2>
+            <form id="noteForm" aria-labelledby="noteFormHeading">
+                <h3 id="noteFormHeading">Create a Note</h3>
+                <label for="noteTitle">Note Title:</label>
+                <input type="text" id="noteTitle" name="title" required>
+                <label for="noteContent">Content:</label>
+                <textarea id="noteContent" name="content" required></textarea>
+                <input type="submit" value="Save Note">
+            </form>
+            <!-- Section to display selected note -->
+            <section id="note-view" aria-live="polite">
+                <h3>View Note</h3>
+                <div id="selected-note">
+                    <p>Select a note from the sidebar to view its details.</p>
+                </div>
+            </section>
+        </section>
     </main>
     <script src="note.js"></script>
     <script>
@@ -35,6 +49,15 @@
             localStorage.removeItem('userId');
             window.location.href = 'index.html';
         }
+
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                alert('Please log in to view your notes.');
+                window.location.href = 'login.html';
+            }
+        });
     </script>
 </body>
 </html>

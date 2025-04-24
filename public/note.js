@@ -12,11 +12,12 @@ async function createNote(e) {
   const userId = localStorage.getItem('userId');
   if (!userId) {
       alert('Please log in to create a note');
+      window.location.href = 'login.html';
       return;
   }
   const newNote = new NoteModel(title, content, userId);
   try {
-      const response = await fetch('http://localhost:3000/api/notes', {
+      const response = await fetch('/api/notes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: `${title}: ${content}`, userId })
@@ -24,15 +25,12 @@ async function createNote(e) {
       if (!response.ok) throw new Error('Failed to save note');
       alert('Note saved successfully');
       document.getElementById('noteForm').reset();
+      // Refresh the notes list after creating a new note
+      await displayNotes();
   } catch (err) {
       console.error(err);
       alert('Error saving note');
   }
-}
-
-const noteForm = document.getElementById('noteForm');
-if (noteForm) {
-  noteForm.addEventListener('submit', createNote);
 }
 
 async function displayNotes() {
@@ -41,10 +39,34 @@ async function displayNotes() {
   try {
       const response = await fetch(`/api/notes?userId=${userId}`);
       const notes = await response.json();
-      const display = document.getElementById('notes-display');
-      display.innerHTML = notes.map(note => `<div><strong>${note.content.split(': ')[0]}</strong>: ${note.content.split(': ')[1]}</div>`).join('');
+      const notesList = document.getElementById('notes-list');
+      if (!notesList) return;
+      notesList.innerHTML = notes.length > 0
+          ? notes.map(note => `<li data-noteid="${note.noteId}" onclick="viewNote(${note.noteId}, '${note.content.split(': ')[0]}', '${note.content.split(': ')[1].replace(/'/g, "\\'")}')">${note.content.split(': ')[0]}</li>`).join('')
+          : '<li>No notes available.</li>';
   } catch (err) {
       console.error(err);
+      alert('Error fetching notes');
   }
 }
+
+function viewNote(noteId, title, content) {
+  const selectedNote = document.getElementById('selected-note');
+  if (!selectedNote) return;
+  selectedNote.innerHTML = `
+      <h4>${title}</h4>
+      <p>${content}</p>
+  `;
+  // Highlight the selected note
+  const noteItems = document.querySelectorAll('#notes-list li');
+  noteItems.forEach(item => {
+      item.classList.toggle('active', item.dataset.noteid == noteId);
+  });
+}
+
+const noteForm = document.getElementById('noteForm');
+if (noteForm) {
+  noteForm.addEventListener('submit', createNote);
+}
+
 document.addEventListener('DOMContentLoaded', displayNotes);

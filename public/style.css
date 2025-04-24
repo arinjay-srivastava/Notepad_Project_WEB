@@ -36,7 +36,6 @@ header p {
     font-size: 1.2rem;
 }
 
-
 nav {
     background-color: #9b59b6;
     padding: 0.5rem;
@@ -76,7 +75,6 @@ main {
 h2 {
     color: #9b59b6;
 }
-
 
 form {
     background-color: #fff;
@@ -118,7 +116,6 @@ input[type="submit"]:hover {
     background-color: #9b59b6;
 }
 
-
 .note-card {
     background-color: #fff;
     border-radius: 8px;
@@ -127,5 +124,80 @@ input[type="submit"]:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Notes page layout */
+.notes-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
 
+/* Sidebar styles */
+.notes-sidebar {
+    width: 30%;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 1rem;
+}
 
+.notes-sidebar h3 {
+    color: #9b59b6;
+    margin-bottom: 1rem;
+}
+
+#notes-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#notes-list li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ecf0f1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#notes-list li:hover {
+    background-color: #f4f4f4;
+}
+
+#notes-list li.active {
+    background-color: #9b59b6;
+    color: #fff;
+}
+
+/* Content area styles */
+.notes-content {
+    width: 70%;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#note-view {
+    margin-top: 2rem;
+}
+
+#selected-note {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .notes-container {
+        flex-direction: side-by-side;
+    }
+
+    .notes-sidebar,
+    .notes-content {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
