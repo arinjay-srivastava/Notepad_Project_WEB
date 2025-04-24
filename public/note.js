@@ -40,7 +40,7 @@ async function deleteNote(noteId) {
       });
       if (!response.ok) throw new Error('Failed to delete note');
       alert('Note deleted successfully');
-      await displayNotes(); // Refresh the notes list
+      await displayNotes();
       const selectedNote = document.getElementById('selected-note');
       if (selectedNote) {
           selectedNote.innerHTML = '<p>Select a note from the sidebar to view its details.</p>';
@@ -63,7 +63,7 @@ async function displayNotes() {
           ? notes.map(note => `
               <li data-noteid="${note.noteId}">
                   <span onclick="viewNote(${note.noteId}, '${note.content.split(': ')[0]}', '${note.content.split(': ')[1].replace(/'/g, "\\'")}')">${note.content.split(': ')[0]}</span>
-                  <button class="delete-btn" onclick="deleteNote(${note.noteId})">Delete</button>
+                  <button class="delete-btn" onclick="deleteNote(${note.noteId})" title="Delete Note">🗑️</button>
               </li>`).join('')
           : '<li>No notes available.</li>';
   } catch (err) {
