@@ -25,11 +25,29 @@ async function createNote(e) {
       if (!response.ok) throw new Error('Failed to save note');
       alert('Note saved successfully');
       document.getElementById('noteForm').reset();
-      // Refresh the notes list after creating a new note
       await displayNotes();
   } catch (err) {
       console.error(err);
       alert('Error saving note');
+  }
+}
+
+async function deleteNote(noteId) {
+  try {
+      const response = await fetch(`/api/notes/${noteId}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+      });
+      if (!response.ok) throw new Error('Failed to delete note');
+      alert('Note deleted successfully');
+      await displayNotes(); // Refresh the notes list
+      const selectedNote = document.getElementById('selected-note');
+      if (selectedNote) {
+          selectedNote.innerHTML = '<p>Select a note from the sidebar to view its details.</p>';
+      }
+  } catch (err) {
+      console.error(err);
+      alert('Error deleting note');
   }
 }
 
@@ -42,7 +60,11 @@ async function displayNotes() {
       const notesList = document.getElementById('notes-list');
       if (!notesList) return;
       notesList.innerHTML = notes.length > 0
-          ? notes.map(note => `<li data-noteid="${note.noteId}" onclick="viewNote(${note.noteId}, '${note.content.split(': ')[0]}', '${note.content.split(': ')[1].replace(/'/g, "\\'")}')">${note.content.split(': ')[0]}</li>`).join('')
+          ? notes.map(note => `
+              <li data-noteid="${note.noteId}">
+                  <span onclick="viewNote(${note.noteId}, '${note.content.split(': ')[0]}', '${note.content.split(': ')[1].replace(/'/g, "\\'")}')">${note.content.split(': ')[0]}</span>
+                  <button class="delete-btn" onclick="deleteNote(${note.noteId})">Delete</button>
+              </li>`).join('')
           : '<li>No notes available.</li>';
   } catch (err) {
       console.error(err);
@@ -57,7 +79,6 @@ function viewNote(noteId, title, content) {
       <h4>${title}</h4>
       <p>${content}</p>
   `;
-  // Highlight the selected note
   const noteItems = document.querySelectorAll('#notes-list li');
   noteItems.forEach(item => {
       item.classList.toggle('active', item.dataset.noteid == noteId);
